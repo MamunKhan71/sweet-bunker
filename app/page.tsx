@@ -1,103 +1,220 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import type React from "react"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Send, Sparkles } from "lucide-react"
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "./components/app-sidebar"
+import WelcomeScreen from "./components/welcome-screen"
+import ChatMessage from "./components/chat-message"
+import LoadingSkeleton from "./components/loading-skeleton"
+import { Textarea } from "@/components/ui/textarea"
+import PDFModal from "./components/pdf-modal"
+import { BorderBeam } from "@/components/magicui/border-beam"
+
+interface PDFResult {
+  fileName: string
+  title: string
+  description: string
+  pageNo: number
+}
+
+interface Message {
+  id: string
+  type: "user" | "results"
+  content: string
+  searchQuantity?: number
+  results?: PDFResult[]
+  timestamp: Date
+}
+
+export default function ChatApp() {
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState("")
+  const [searchQuantity, setSearchQuantity] = useState(5)
+  const [isLoading, setIsLoading] = useState(false)
+  const [selectedPDF, setSelectedPDF] = useState<PDFResult | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim()) return
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      type: "user",
+      content: input,
+      searchQuantity,
+      timestamp: new Date(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setInput("")
+    setIsLoading(true)
+
+    try {
+      const response = await fetch("/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: input,
+          quantity: searchQuantity,
+        }),
+      })
+
+      const data = await response.json()
+
+      const resultsMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: "results",
+        content: `Found ${data.results.length} results for "${input}"`,
+        results: data.results,
+        timestamp: new Date(),
+      }
+
+      setMessages((prev) => [...prev, resultsMessage])
+    } catch (error) {
+      console.error("Search failed:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handlePromptSelect = (prompt: string) => {
+    setInput(prompt)
+  }
+
+  const openPDF = (pdf: PDFResult) => {
+    setSelectedPDF(pdf)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit(e as any)
+    }
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <AppSidebar />
+      <SidebarInset>
+        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-white flex flex-col">
+          {/* Header */}
+          <header className="border-b border-gray-100 bg-white/80 backdrop-blur-xl sticky top-0 z-10">
+            <div className="px-6 py-4">
+              <div className="flex items-center gap-4">
+                <SidebarTrigger className="text-gray-600 hover:text-black transition-colors" />
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 flex items-center justify-center">
+                    <img src="/sweet-banker.png" alt="sweet-banker" />
+                  </div>
+                  <div>
+                    <h1 className="text-xl font-bold text-gray-900">PDF Search Assistant</h1>
+                    <p className="text-xs text-gray-500">AI-powered document discovery</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Chat Container */}
+          <div className="flex-1 px-6 pb-40 overflow-y-auto">
+            <div className="md:max-w-5xl mx-auto">
+              {messages.length === 0 ? (
+                <WelcomeScreen onPromptSelect={handlePromptSelect} />
+              ) : (
+                <div className="py-8 space-y-8">
+                  {messages.map((message) => (
+                    <div key={message.id} className="animate-in slide-in-from-bottom-4 duration-500">
+                      <ChatMessage message={message} onPDFClick={openPDF} />
+                    </div>
+                  ))}
+                  {isLoading && <LoadingSkeleton />}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Enhanced Input Form - Fixed at bottom */}
+          <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100">
+            <div className="md:max-w-5xl mx-auto pl-61 p-6">
+              <div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="relative rounded-2xl ">
+                    <BorderBeam
+                      duration={6}
+                      size={400}
+                      className="from-transparent via-red-500 to-transparent"
+                    />
+                    <BorderBeam
+                      duration={6}
+                      delay={3}
+                      size={400}
+                      borderWidth={2}
+                      className="from-transparent via-blue-500 to-transparent"
+                    />
+                    <Textarea
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Ask me anything about your documents... (Press Enter to send, Shift+Enter for new line)"
+                      className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
+                      disabled={isLoading}
+                    />
+
+                    {/* Quantity Selector */}
+                    <div className="absolute right-4 top-4 flex items-center gap-3">
+                      {/* <div className="flex items-center gap-2 bg-gray-100 rounded-full px-3 py-1.5">
+                        <span className="text-xs font-medium text-gray-600">Results:</span>
+                        <select
+                          value={searchQuantity}
+                          onChange={(e) => setSearchQuantity(Number.parseInt(e.target.value))}
+                          className="text-xs font-medium bg-transparent border-none outline-none text-gray-800"
+                          disabled={isLoading}
+                        >
+                          {[3, 5, 8, 10, 15].map((num) => (
+                            <option key={num} value={num}>
+                              {num}
+                            </option>
+                          ))}
+                        </select>
+                      </div> */}
+
+                      <Button
+                        type="submit"
+                        disabled={isLoading || !input.trim()}
+                        className="bg-black hover:bg-gray-800 text-white rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                      >
+                        <Send className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Status indicator */}
+                  {isLoading && (
+                    <div className="flex items-center gap-2 text-sm text-gray-500 animate-pulse">
+                      <div className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"></div>
+                      <div
+                        className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"
+                        style={{ animationDelay: "0.1s" }}
+                      ></div>
+                      <div
+                        className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"
+                        style={{ animationDelay: "0.2s" }}
+                      ></div>
+                      <span className="ml-2">Searching your documents...</span>
+                    </div>
+                  )}
+                </form>
+              </div>
+            </div>
+          </div>
+
+          {/* PDF Modal */}
+          {selectedPDF && <PDFModal pdf={selectedPDF} onClose={() => setSelectedPDF(null)} />}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </SidebarInset>
+    </>
+  )
 }

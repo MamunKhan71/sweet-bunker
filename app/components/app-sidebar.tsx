@@ -13,7 +13,7 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar";
-import { HelpCircle, History, Plus, Search, Settings } from "lucide-react";
+import { Copyright, HelpCircle, History, Plus, Search, Settings } from "lucide-react";
 import { useState } from "react";
 
 const recentSearches = [
@@ -33,9 +33,10 @@ export function AppSidebar() {
             <SidebarHeader className="p-6 border-b border-gray-100">
                 <div>
                     <div>
-                        <img src="/logo.svg" alt="logo-svg"  />
+                        <img src="/logo.svg" alt="logo-svg" />
                     </div>
                 </div>
+                
             </SidebarHeader>
 
             <SidebarContent className="px-4">

@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Send, Sparkles } from "lucide-react"
+import { Copyright, Send, Sparkles } from "lucide-react"
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "./components/app-sidebar"
 import WelcomeScreen from "./components/welcome-screen"
@@ -105,13 +105,19 @@ export default function ChatApp() {
             <div className="px-6 py-4">
               <div className="flex items-center gap-4">
                 <SidebarTrigger className="text-gray-600 hover:text-black transition-colors" />
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 w-full">
                   <div className="w-8 h-8 flex items-center justify-center">
                     <img src="/sweet-banker.png" alt="sweet-banker" />
                   </div>
-                  <div>
-                    <h1 className="text-xl font-bold text-gray-900">PDF Search Assistant</h1>
-                    <p className="text-xs text-gray-500">AI-powered document discovery</p>
+                  <div className="flex justify-between w-full items-center">
+                    <div className="w-full">
+                      <h1 className="text-xl font-bold text-gray-900">PDF Search Assistant</h1>
+                      <p className="text-xs text-gray-500">AI-powered document discovery</p>
+                    </div>
+                    <div className="text-sm text-gray-400 flex gap-2 items-center w-96 ">
+                      <Copyright className="w-4 h-4" />
+                      <span className="font-medium text-right">All Rights Reserved | Acote Group LTD</span>
+                    </div>
                   </div>
                 </div>
               </div>

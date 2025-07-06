@@ -126,7 +126,7 @@ export default function ChatApp() {
                     </div>
                     <div className="text-sm text-gray-400 flex gap-2 items-center w-96 ">
                       <Copyright className="w-4 h-4" />
-                      <span className="font-medium text-right">모든 권리 보유 |<span><a target="_blank" href="https://acotegroup.com/">Acote Group LTD</a></span></span>
+                      <span className="font-medium text-right">모든 권리 보유 |<span><a target="_blank" href="https://acotegroup.com/"> Acote Group LTD</a></span></span>
                     </div>
                   </div>
                 </div>

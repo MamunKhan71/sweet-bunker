@@ -37,48 +37,59 @@ export default function ChatApp() {
   const [selectedPDF, setSelectedPDF] = useState<PDFResult | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim()) return
-
+    e.preventDefault();
+    if (!input.trim()) return;
+  
     const userMessage: Message = {
       id: Date.now().toString(),
       type: "user",
       content: input,
-      searchQuantity,
       timestamp: new Date(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    setIsLoading(true)
-
+    };
+  
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+  
     try {
-      const response = await fetch("/api/search", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/search`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          prompt: input,
-          quantity: searchQuantity,
+          "query": input,
         }),
-      })
+      });
+  
+      const data = await response.json();
 
-      const data = await response.json()
+      const enrichedResults = data.map((item: any) => {
+        const match = item.answer.match(/page(?:\s+no\.?|:)?\s*(\d+)/i);
+        const pageNo = match ? parseInt(match[1]) : null;
+        return {
+          fileName: item.filename,
+          pageNo : pageNo,
+          description: item.answer
+        };
+      });
 
+      console.log(enrichedResults)
+  
       const resultsMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "results",
-        content: `Found ${data.results.length} results for "${input}"`,
-        results: data.results,
+        content: `Found ${enrichedResults.length} results for "${input}"`,
+        results: enrichedResults,
         timestamp: new Date(),
-      }
-
-      setMessages((prev) => [...prev, resultsMessage])
+      };
+  
+      setMessages((prev) => [...prev, resultsMessage]);
     } catch (error) {
-      console.error("Search failed:", error)
+      console.error("Search failed:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
+  
 
   const handlePromptSelect = (prompt: string) => {
     setInput(prompt)

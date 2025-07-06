@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import {
     Sidebar,
     SidebarContent,
@@ -13,8 +12,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
-} from "@/components/ui/sidebar"
-import { FileText, History, Star, Settings, HelpCircle, Plus, Search, BookOpen, Archive } from "lucide-react"
+} from "@/components/ui/sidebar";
+import { HelpCircle, History, Plus, Search, Settings } from "lucide-react";
+import { useState } from "react";
 
 const recentSearches = [
     "Modern Living Room Sketch",

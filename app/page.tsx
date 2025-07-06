@@ -121,8 +121,8 @@ export default function ChatApp() {
                   </div>
                   <div className="flex justify-between w-full items-center">
                     <div className="w-full">
-                      <h1 className="text-xl font-bold text-gray-900">PDF Search Assistant</h1>
-                      <p className="text-xs text-gray-500">AI-powered document discovery</p>
+                      <h1 className="text-xl font-bold text-gray-900">PDF 검색 도우미                      </h1>
+                      <p className="text-xs text-gray-500">AI 기반 문서 탐색                      </p>
                     </div>
                     <div className="text-sm text-gray-400 flex gap-2 items-center w-96 ">
                       <Copyright className="w-4 h-4" />
@@ -154,7 +154,7 @@ export default function ChatApp() {
 
           {/* Enhanced Input Form - Fixed at bottom */}
           <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100">
-            <div className="md:max-w-5xl mx-auto pl-61 p-6">
+            <div className="md:max-w-5xl mx-auto p-6">
               <div>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="relative rounded-2xl ">

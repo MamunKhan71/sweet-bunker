@@ -17,13 +17,13 @@ import {
 import { FileText, History, Star, Settings, HelpCircle, Plus, Search, BookOpen, Archive } from "lucide-react"
 
 const recentSearches = [
-    "Machine Learning Algorithms",
-    "Data Science Fundamentals",
-    "Neural Networks",
-    "Computer Vision",
-    "Natural Language Processing",
-]
-
+    "Modern Living Room Sketch",
+    "Minimalist Bedroom Layout",
+    "Scandinavian Kitchen Design",
+    "Cozy Room with Fireplace",
+    "Boho Interior Sketch Ideas",
+    "Studio Apartment Floor Plan",
+];
 
 export function AppSidebar() {
     const [activeSection, setActiveSection] = useState("search")

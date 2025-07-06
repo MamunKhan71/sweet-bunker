@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Sparkles, FileText, Search, Brain, BookOpen, TrendingUp, Zap, Target } from "lucide-react"
+import { Sparkles, FileText, Search, Brain, BookOpen, TrendingUp, Zap, Target, Home, Lightbulb } from "lucide-react"
 
 interface WelcomeScreenProps {
     onPromptSelect: (prompt: string) => void
@@ -11,26 +11,29 @@ interface WelcomeScreenProps {
 
 const premadePrompts = [
     {
-        category: "Research & Analysis",
-        icon: Brain,
-        color: "from-blue-500 to-blue-600",
+        category: "Interior Design Sketch Types",
+        icon: Home, // Replace with a suitable icon component for interiors
+        color: "from-pink-500 to-red-500",
         prompts: [
-            "Find research papers about machine learning algorithms",
-            "Show me documents related to data science methodologies",
-            "Search for papers on artificial intelligence ethics",
+            "Sketch of a cozy living room with a fire heater",
+            "Interior design sketch of a modern kitchen with island seating",
+            "Room layout sketch featuring Scandinavian-style furniture",
+            "Sketch of a luxury bathroom with freestanding tub",
         ],
     },
     {
-        category: "Technical Documentation",
-        icon: FileText,
-        color: "from-green-500 to-green-600",
+        category: "Design Research & Inspiration",
+        icon: Lightbulb,
+        color: "from-yellow-500 to-orange-500",
         prompts: [
-            "Find technical specifications and API documentation",
-            "Show me implementation guides and best practices",
-            "Search for system architecture documents",
+            "Find references for Japandi-style interiors",
+            "Search for interior design trends 2025",
+            "Explore sketch styles used in luxury home design",
+            "Collect inspiration for rustic living room layouts",
         ],
     }
-]
+];
+
 
 export default function WelcomeScreen({ onPromptSelect }: WelcomeScreenProps) {
     const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -50,8 +53,8 @@ export default function WelcomeScreen({ onPromptSelect }: WelcomeScreenProps) {
                         <Card
                             key={categoryIndex}
                             className={`p-8 border-2 transition-all duration-300 hover:shadow-xl ${hoveredCard === categoryIndex
-                                    ? "border-[#dac0ac]/50 shadow-lg scale-[1.02]"
-                                    : "border-gray-100 hover:border-[#dac0ac]/30"
+                                ? "border-[#dac0ac]/50 shadow-lg scale-[1.02]"
+                                : "border-gray-100 hover:border-[#dac0ac]/30"
                                 }`}
                             onMouseEnter={() => setHoveredCard(categoryIndex)}
                             onMouseLeave={() => setHoveredCard(null)}

@@ -3,90 +3,90 @@ import { type NextRequest, NextResponse } from "next/server"
 // Enhanced dummy data with more variety
 const dummyResults = [
     {
-        fileName: "1298.pdf",
-        title: "Advanced Machine Learning Techniques for Modern Applications",
+        fileName: "240110.pdf",
+        title: "Minimalist Interiors: Concept Sketches & Layouts",
         description:
-            "A comprehensive guide to cutting-edge machine learning algorithms including deep neural networks, reinforcement learning, and their practical applications in industry scenarios.",
-        pageNo: 5,
+            "A comprehensive sketch collection highlighting minimalist interior concepts including living spaces and work areas.",
+        pageNo: 2,
     },
     {
-        fileName: "2456.pdf",
-        title: "Data Science Fundamentals: From Theory to Practice",
+        fileName: "240111.pdf",
+        title: "Interior Space Planning for Modern Living",
         description:
-            "Essential concepts and methodologies for data science practitioners, covering statistical analysis, data visualization, and predictive modeling techniques.",
-        pageNo: 12,
+            "Essential spatial design sketches and layout strategies for functional and stylish interiors.",
+        pageNo: 2,
     },
     {
-        fileName: "3789.pdf",
-        title: "Neural Networks and Deep Learning Architecture",
+        fileName: "240112.pdf",
+        title: "Furniture Arrangement Concepts for Homes & Offices",
         description:
-            "In-depth exploration of neural network architectures, including CNNs, RNNs, and Transformers, with practical implementation guides and optimization strategies.",
-        pageNo: 23,
+            "Detailed sketches showing innovative furniture placement and spatial flow in diverse interior settings.",
+        pageNo: 2,
     },
     {
-        fileName: "4567.pdf",
-        title: "Natural Language Processing in the Age of Transformers",
+        fileName: "240115.pdf",
+        title: "Contemporary Interior Sketch Portfolio",
         description:
-            "Modern approaches to NLP including BERT, GPT models, sentiment analysis, and language generation techniques with real-world case studies.",
+            "Sketch-driven portfolio exploring contemporary residential and commercial interior concepts.",
+        pageNo: 2,
+    },
+    {
+        fileName: "240116.pdf",
+        title: "Color & Texture in Interior Design Sketches",
+        description:
+            "Visual explorations of color palettes, textures, and materials through hand-drawn and digital sketches.",
+        pageNo: 2,
+    },
+    {
+        fileName: "240117.pdf",
+        title: "Lighting Design Sketches for Interior Ambience",
+        description:
+            "Creative lighting concepts illustrated through mood boards and hand-drawn light placement sketches.",
+        pageNo: 2,
+    },
+    {
+        fileName: "240125.pdf",
+        title: "Interior Sketches for Boutique & Commercial Spaces",
+        description:
+            "Design sketches for boutique shops, studios, and office interiors with branding integration.",
+        pageNo: 2,
+    },
+    {
+        fileName: "240126.pdf",
+        title: "Eco-Friendly Interiors: Sketches & Sustainability Concepts",
+        description:
+            "Interior design concepts integrating sustainable materials and practices, presented through visuals and sketches.",
+        pageNo: 1,
+    },
+    {
+        fileName: "240215.pdf",
+        title: "Luxury Interior Design Sketchbook",
+        description:
+            "A sketch collection focusing on luxury interiors with premium finishes and bespoke furniture design.",
+        pageNo: 3,
+    },
+    {
+        fileName: "240223.pdf",
+        title: "Sketches of Interior Renovation Concepts",
+        description:
+            "Visual plans for redesigning and renovating indoor spaces, including before-and-after sketch comparisons.",
+        pageNo: 2,
+    },
+    {
+        fileName: "240304.pdf",
+        title: "Interior Design Mood Boards & Sketch Studies",
+        description:
+            "Mixed-media sketches and boards for initial concept visualization and client presentation.",
+        pageNo: 2,
+    },
+    {
+        fileName: "240731.pdf",
+        title: "Workspace Interiors: Creative Sketch Series",
+        description:
+            "Sketches of creative and ergonomic office spaces designed to boost productivity and inspiration.",
         pageNo: 8,
     },
-    {
-        fileName: "5432.pdf",
-        title: "Computer Vision Applications and Implementation",
-        description:
-            "Practical applications of computer vision in industry, from image recognition and object detection to autonomous systems and medical imaging.",
-        pageNo: 15,
-    },
-    {
-        fileName: "6789.pdf",
-        title: "Reinforcement Learning: Strategies and Applications",
-        description:
-            "Advanced reinforcement learning algorithms and their implementation in game theory, robotics, and autonomous decision-making systems.",
-        pageNo: 31,
-    },
-    {
-        fileName: "7890.pdf",
-        title: "Big Data Analytics and Distributed Computing",
-        description:
-            "Scalable solutions for processing and analyzing large datasets using distributed computing frameworks like Spark, Hadoop, and cloud-based solutions.",
-        pageNo: 7,
-    },
-    {
-        fileName: "8901.pdf",
-        title: "Artificial Intelligence Ethics and Responsible Development",
-        description:
-            "Ethical considerations, bias mitigation, and responsible AI development practices for creating fair and transparent AI systems.",
-        pageNo: 19,
-    },
-    {
-        fileName: "9012.pdf",
-        title: "Quantum Computing and Machine Learning Integration",
-        description:
-            "Exploring the intersection of quantum computing and machine learning, including quantum algorithms and their potential applications.",
-        pageNo: 42,
-    },
-    {
-        fileName: "1023.pdf",
-        title: "Blockchain Technology and Decentralized Systems",
-        description:
-            "Comprehensive overview of blockchain technology, smart contracts, and decentralized applications with security considerations.",
-        pageNo: 28,
-    },
-    {
-        fileName: "1134.pdf",
-        title: "Cloud Computing Architecture and Best Practices",
-        description:
-            "Modern cloud computing strategies, microservices architecture, and DevOps practices for scalable application development.",
-        pageNo: 16,
-    },
-    {
-        fileName: "1245.pdf",
-        title: "Cybersecurity in the Digital Age",
-        description:
-            "Advanced cybersecurity strategies, threat detection, and protection mechanisms for modern digital infrastructure.",
-        pageNo: 33,
-    },
-]
+];
 
 export async function POST(request: NextRequest) {
     try {

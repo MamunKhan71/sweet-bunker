@@ -35,7 +35,7 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                 <div className="max-w-2xl">
                     <div className="flex items-start gap-3">
                         <div className="flex-1">
-                            <Card className="bg-black text-white p-4 rounded-2xl rounded-br-md shadow-md hover:shadow-lg transition-all duration-200">
+                            <Card className="bg-gray-50 text-black p-4 rounded-2xl rounded-br-md shadow-md hover:shadow-lg transition-all duration-200">
                                 <p className="text-sm leading-relaxed">{message.content}</p>
                                 {message.searchQuantity && (
                                     <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-700">

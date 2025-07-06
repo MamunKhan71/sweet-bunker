@@ -7,7 +7,7 @@ const dummyResults = [
         title: "Minimalist Interiors: Concept Sketches & Layouts",
         description:
             "A comprehensive sketch collection highlighting minimalist interior concepts including living spaces and work areas.",
-        pageNo: 2,
+        pageNo: 3,
     },
     {
         fileName: "240111.pdf",
@@ -49,7 +49,7 @@ const dummyResults = [
         title: "Interior Sketches for Boutique & Commercial Spaces",
         description:
             "Design sketches for boutique shops, studios, and office interiors with branding integration.",
-        pageNo: 2,
+        pageNo: 9,
     },
     {
         fileName: "240126.pdf",

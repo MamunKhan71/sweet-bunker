@@ -7,7 +7,7 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "PDF Search Assistant",
+  title: "Sweet Bunker - PDF Search Assistant",
   description: "AI-powered PDF search and discovery platform",
 }
 

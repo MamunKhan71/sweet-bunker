@@ -1,17 +1,16 @@
 "use client"
 
+import { BorderBeam } from "@/components/magicui/border-beam"
+import { Button } from "@/components/ui/button"
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
+import { Textarea } from "@/components/ui/textarea"
+import { Copyright, Send } from "lucide-react"
 import type React from "react"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Copyright, Send, Sparkles } from "lucide-react"
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "./components/app-sidebar"
-import WelcomeScreen from "./components/welcome-screen"
 import ChatMessage from "./components/chat-message"
 import LoadingSkeleton from "./components/loading-skeleton"
-import { Textarea } from "@/components/ui/textarea"
 import PDFModal from "./components/pdf-modal"
-import { BorderBeam } from "@/components/magicui/border-beam"
+import WelcomeScreen from "./components/welcome-screen"
 
 interface PDFResult {
   fileName: string
@@ -108,14 +107,14 @@ export default function ChatApp() {
 
   return (
     <>
-      <AppSidebar />
+      {/* <AppSidebar /> */}
       <SidebarInset>
         <div className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-white flex flex-col">
           {/* Header */}
           <header className="border-b border-gray-100 bg-white/80 backdrop-blur-xl sticky top-0 z-10">
             <div className="px-6 py-4">
               <div className="flex items-center gap-4">
-                <SidebarTrigger className="text-gray-600 hover:text-black transition-colors" />
+                {/* <SidebarTrigger className="text-gray-600 hover:text-black transition-colors" /> */}
                 <div className="flex items-center gap-3 w-full">
                   <div className="w-8 h-8 flex items-center justify-center">
                     <img src="/sweet-banker.png" alt="sweet-banker" />
@@ -175,7 +174,7 @@ export default function ChatApp() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handleKeyDown}
-                      placeholder="Ask me anything about your documents... (Press Enter to send, Shift+Enter for new line)"
+                      placeholder="문서에 대해 궁금한 걸 물어보세요…(엔터를 눌러 전송, Shift+Enter는 줄바꿈)"
                       className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
                       disabled={isLoading}
                     />

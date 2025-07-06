@@ -11,25 +11,25 @@ interface WelcomeScreenProps {
 
 const premadePrompts = [
     {
-        category: "Interior Design Sketch Types",
-        icon: Home, // Replace with a suitable icon component for interiors
+        category: "인테리어 디자인 스케치 유형",
+        icon: Home, 
         color: "from-pink-500 to-red-500",
         prompts: [
-            "Sketch of a cozy living room with a fire heater",
-            "Interior design sketch of a modern kitchen with island seating",
-            "Room layout sketch featuring Scandinavian-style furniture",
-            "Sketch of a luxury bathroom with freestanding tub",
+            "벽난로가 있는 아늑한 거실 스케치",
+            "아일랜드 좌석이 있는 모던 키친의 인테리어 디자인 스케치",
+            "스칸디나비아 스타일 가구가 있는 방 배치 스케치",
+            "독립형 욕조가 있는 고급 욕실 스케치",
         ],
     },
     {
-        category: "Design Research & Inspiration",
+        category: "디자인 리서치 및 영감",
         icon: Lightbulb,
         color: "from-yellow-500 to-orange-500",
         prompts: [
-            "Find references for Japandi-style interiors",
-            "Search for interior design trends 2025",
-            "Explore sketch styles used in luxury home design",
-            "Collect inspiration for rustic living room layouts",
+            "자판디 스타일 인테리어 참고자료 찾기",
+            "2025년 인테리어 디자인 트렌드 검색",
+            "고급 주택 디자인에서 사용되는 스케치 스타일 탐색",
+            "전원풍 거실 레이아웃에서 영감 얻기",
         ],
     }
 ];
@@ -44,8 +44,8 @@ export default function WelcomeScreen({ onPromptSelect }: WelcomeScreenProps) {
             {/* Prompt Categories */}
             <div className="space-y-8">
                 <div className="text-center animate-in slide-in-from-bottom-4 duration-500 delay-400">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-3">Get Started with These Prompts</h2>
-                    <p className="text-gray-600">Click on any prompt to begin your search journey</p>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-3">이 프롬프트로 시작해보세요</h2>
+                    <p className="text-gray-600">검색을 시작하려면 아무 프롬프트나 클릭하세요</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-in slide-in-from-bottom-4 duration-500 delay-500">

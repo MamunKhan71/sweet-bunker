@@ -7,8 +7,8 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Sweet Bunker - PDF Search Assistant",
-  description: "AI-powered PDF search and discovery platform",
+  title: "Sweet Bunker - PDF 검색 도우미",
+  description: "AI 기반 문서 탐색",
 }
 
 export default function RootLayout({

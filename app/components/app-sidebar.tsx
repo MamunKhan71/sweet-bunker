@@ -17,11 +17,11 @@ import { Copyright, HelpCircle, History, Plus, Search, Settings } from "lucide-r
 import { useState } from "react";
 
 const recentSearches = [
-    "Modern Living Room Sketch",
-    "Minimalist Bedroom Layout",
-    "Scandinavian Kitchen Design",
-    "Cozy Room with Fireplace",
-    "Boho Interior Sketch Ideas",
+    "모던 거실 스케치",
+    "미니멀리스트 침실 레이아웃",
+    "스칸디나비아 키친",
+    "벽난로가 있는 아늑한 방",
+    "보헤미안 인테리어 스케치 아이디어",
     "Studio Apartment Floor Plan",
 ];
 
@@ -42,7 +42,7 @@ export function AppSidebar() {
             <SidebarContent className="px-4">
                 <SidebarGroup>
                     <SidebarGroupLabel className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                        Quick Actions
+                    빠른 작업
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu className="space-y-1">
@@ -53,13 +53,13 @@ export function AppSidebar() {
                                     onClick={() => setActiveSection("search")}
                                 >
                                     <Search className="w-4 h-4" />
-                                    <span className="font-medium">New Search</span>
+                                    <span className="font-medium">새 검색</span>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
                                 <SidebarMenuButton className="w-full justify-start h-11 rounded-xl hover:bg-gray-100 transition-colors">
                                     <Plus className="w-4 h-4" />
-                                    <span className="font-medium">Upload PDF</span>
+                                    <span className="font-medium">PDF 업로드</span>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
@@ -68,7 +68,7 @@ export function AppSidebar() {
 
                 <SidebarGroup>
                     <SidebarGroupLabel className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                        Recent Searches
+                    최근 검색어
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu className="space-y-1">
@@ -89,13 +89,13 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton className="w-full justify-start h-11 rounded-xl hover:bg-gray-100 transition-colors">
                             <Settings className="w-4 h-4" />
-                            <span className="font-medium">Settings</span>
+                            <span className="font-medium">설정</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                     <SidebarMenuItem>
                         <SidebarMenuButton className="w-full justify-start h-11 rounded-xl hover:bg-gray-100 transition-colors">
                             <HelpCircle className="w-4 h-4" />
-                            <span className="font-medium">Help & Support</span>
+                            <span className="font-medium">도움말 및 지원</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

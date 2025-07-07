@@ -1,9 +1,9 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { FileText, User, Bot, ExternalLink, Clock, BookOpen } from "lucide-react"
+import { BookOpen, Bot, Clock, ExternalLink, FileText, User } from "lucide-react"
+import { useEffect, useState } from "react"
 import ImageFromBase64 from "./imageBase64"
-import { useState, useEffect } from "react"
 
 interface PDFResult {
     fileName: string
@@ -27,7 +27,6 @@ interface ChatMessageProps {
     onPDFClick: (pdf: PDFResult) => void
 }
 
-// Typewriter effect hook
 function useTypewriter(text: string, speed = 30) {
     const [displayText, setDisplayText] = useState("")
     const [isComplete, setIsComplete] = useState(false)

@@ -1,7 +1,7 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { FileText, User, Bot, ExternalLink, Clock } from 'lucide-react'
+import { FileText, User, Bot, ExternalLink, Clock, BookOpen } from 'lucide-react'
 
 interface PDFResult {
     fileName: string
@@ -93,12 +93,18 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                                     <p className="text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">{pdf.description}</p>
                                                     <div className="flex items-center gap-4 mt-2">
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                                                            <div className="w-1 h-1 bg-blue-500 rounded-full"></div>
+                                                            <FileText className="w-4 h-4 text-[#c4a688] rounded-full" />
                                                             <span className="font-medium truncate max-w-24">{pdf.fileName}</span>
                                                         </div>
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                                                            <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-                                                            <span>Page {pdf.pageNo}</span>
+                                                            <BookOpen className="w-4 h-4 text-[#c4a688] rounded-full" />
+                                                            {
+                                                                pdf.pageNo ? (
+                                                                    <span>페이지 {pdf.pageNo - 1}</span>
+                                                                ) : (
+                                                                    <span>페이지 번호가 명확하지 않아 유사한 결과를 표시합니다.</span>
+                                                                )
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>

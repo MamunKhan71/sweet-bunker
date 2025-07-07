@@ -1,5 +1,5 @@
 "use client"
-
+import { fromPath } from "pdf2pic";
 import { BorderBeam } from "@/components/magicui/border-beam"
 import { Button } from "@/components/ui/button"
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
@@ -12,6 +12,14 @@ import LoadingSkeleton from "./components/loading-skeleton"
 import PDFModal from "./components/pdf-modal"
 import WelcomeScreen from "./components/welcome-screen"
 
+const options = {
+  density: 100,
+  saveFilename: "untitled",
+  savePath: "./images",
+  format: "png",
+  width: 600,
+  height: 600
+};
 interface PDFResult {
   fileName: string
   title: string
@@ -38,18 +46,18 @@ export default function ChatApp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-  
+
     const userMessage: Message = {
       id: Date.now().toString(),
       type: "user",
       content: input,
       timestamp: new Date(),
     };
-  
+
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
-  
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/search`, {
         method: "POST",
@@ -58,37 +66,53 @@ export default function ChatApp() {
           "query": input,
         }),
       });
-  
+
       const data = await response.json();
 
       const enrichedResults = data.map((item: any) => {
         const match = item.answer.match(/page(?:\s+no\.?|:)?\s*(\d+)/i);
-        const pageNo = match ? parseInt(match[1]) : null;
+        let pageNo = match ? parseInt(match[1]) : null;
+
+        if (pageNo === 1) {
+          pageNo = 2;
+        }
+
+        const cleanedFileName = item.filename
+          .replace(/\.pdf$/i, '')        
+          .replace(/^\d+_/, '');
         return {
           fileName: item.filename,
-          pageNo : pageNo,
-          description: item.answer
+          cleandedFileName: cleanedFileName,
+          title: cleanedFileName,
+          pageNo: pageNo,
+          description: item.answer,
         };
       });
 
+
+
+
+      // const pdf2PicImage = (EnrichedResults) => {
+      //   console.log(EnrichedResults)
+      // }
       console.log(enrichedResults)
-  
+
       const resultsMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "results",
-        content: `Found ${enrichedResults.length} results for "${input}"`,
+        content: `결과 ${enrichedResults.length} 건을 찾았습니다 "${input}"`,
         results: enrichedResults,
         timestamp: new Date(),
       };
-  
+
       setMessages((prev) => [...prev, resultsMessage]);
     } catch (error) {
-      console.error("Search failed:", error);
+      console.error("검색에 실패했습니다:", error);
     } finally {
       setIsLoading(false);
     }
   };
-  
+
 
   const handlePromptSelect = (prompt: string) => {
     setInput(prompt)
@@ -121,7 +145,7 @@ export default function ChatApp() {
                   </div>
                   <div className="flex justify-between w-full items-center">
                     <div className="w-full">
-                      <h1 className="text-xl font-bold text-gray-900">PDF 검색 도우미                      </h1>
+                      <h1 className="text-xl font-bold text-gray-900">SWEET BUNKER DESIGN Co.,Ltd</h1>
                       <p className="text-xs text-gray-500">AI 기반 문서 탐색                      </p>
                     </div>
                     <div className="text-sm text-gray-400 flex gap-2 items-center w-96 ">
@@ -219,7 +243,7 @@ export default function ChatApp() {
                         className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"
                         style={{ animationDelay: "0.2s" }}
                       ></div>
-                      <span className="ml-2">Searching your documents...</span>
+                      <span className="ml-2">문서 검색중 입니다...</span>
                     </div>
                   )}
                 </form>

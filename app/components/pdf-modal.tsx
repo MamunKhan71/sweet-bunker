@@ -41,7 +41,7 @@ export default function PDFModal({ pdf, onClose }: PDFModalProps) {
                         <h2 className="text-2xl font-bold text-gray-900 truncate">{pdf.title}</h2>
                         <div className="flex items-center gap-4 mt-2">
                             <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">📄 {pdf.fileName}</span>
-                            <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">📍 Page {pdf.pageNo}</span>
+                            <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">📍 페이지 {pdf.pageNo - 1}</span>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 ml-6">

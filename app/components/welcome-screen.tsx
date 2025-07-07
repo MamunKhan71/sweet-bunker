@@ -26,7 +26,7 @@ const premadePrompts = [
         icon: Lightbulb,
         color: "from-yellow-500 to-orange-500",
         prompts: [
-            "자판디 스타일 인테리어 참고자료 찾기",
+            "일본풍 스타일 인테리어 참고자료 찾기",
             "2025년 인테리어 디자인 트렌드 검색",
             "고급 주택 디자인에서 사용되는 스케치 스타일 탐색",
             "전원풍 거실 레이아웃에서 영감 얻기",

@@ -2,12 +2,14 @@
 
 import { Card } from "@/components/ui/card"
 import { FileText, User, Bot, ExternalLink, Clock, BookOpen } from 'lucide-react'
+import ImageFromBase64 from "./imageBase64"
 
 interface PDFResult {
     fileName: string
     title: string
     description: string
     pageNo: number
+    imageBuffer: string
 }
 
 interface Message {
@@ -28,6 +30,7 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
     const formatTime = (date: Date) => {
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     }
+    console.log(message)
 
     if (message.type === "user") {
         return (
@@ -80,9 +83,12 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                             onClick={() => onPDFClick(pdf)}
                                         >
                                             <div className="flex items-start gap-3">
-                                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#dac0ac]/10 to-[#c4a688]/10 flex items-center justify-center flex-shrink-0 group-hover/card:from-[#dac0ac]/20 group-hover/card:to-[#c4a688]/20 transition-all duration-300">
-                                                    <FileText className="w-4 h-4 text-[#dac0ac]" />
+                                                <div className="h-fit w-44 object-cover border rounded-lg overflow-hidden shadow-sm">
+                                                    <ImageFromBase64 base64String={pdf.imageBuffer} />
                                                 </div>
+                                                {/* <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#dac0ac]/10 to-[#c4a688]/10 flex items-center justify-center flex-shrink-0 group-hover/card:from-[#dac0ac]/20 group-hover/card:to-[#c4a688]/20 transition-all duration-300">
+                                                    <FileText className="w-4 h-4 text-[#dac0ac]" />
+                                                </div> */}
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-start justify-between gap-2">
                                                         <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/card:text-[#dac0ac] transition-colors line-clamp-1">
@@ -91,8 +97,10 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                                         <ExternalLink className="w-4 h-4 text-gray-400 group-hover/card:text-[#dac0ac] transition-colors flex-shrink-0" />
                                                     </div>
                                                     <p className="text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">{pdf.description}</p>
+
                                                     <div className="flex items-center gap-4 mt-2">
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500">
+
                                                             <FileText className="w-4 h-4 text-[#c4a688] rounded-full" />
                                                             <span className="font-medium truncate max-w-24">{pdf.fileName}</span>
                                                         </div>
@@ -100,7 +108,7 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                                             <BookOpen className="w-4 h-4 text-[#c4a688] rounded-full" />
                                                             {
                                                                 pdf.pageNo ? (
-                                                                    <span>페이지 {pdf.pageNo - 1}</span>
+                                                                    <span>페이지 {pdf.pageNo}</span>
                                                                 ) : (
                                                                     <span>페이지 번호가 명확하지 않아 유사한 결과를 표시합니다.</span>
                                                                 )

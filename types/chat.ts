@@ -22,3 +22,4 @@ export interface ChatSession {
     messages: Message[]
     createdAt: Date
 }
+

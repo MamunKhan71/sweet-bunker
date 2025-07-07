@@ -1,16 +1,20 @@
 "use client"
-import { fromPath } from "pdf2pic";
 import { BorderBeam } from "@/components/magicui/border-beam"
 import { Button } from "@/components/ui/button"
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { Textarea } from "@/components/ui/textarea"
 import { Copyright, Send } from "lucide-react"
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ChatMessage from "./components/chat-message"
 import LoadingSkeleton from "./components/loading-skeleton"
 import PDFModal from "./components/pdf-modal"
 import WelcomeScreen from "./components/welcome-screen"
+
+interface EnrichedResult {
+  fileName: string;
+  pageNo: number | null;
+}
 
 const options = {
   density: 100,
@@ -25,6 +29,7 @@ interface PDFResult {
   title: string
   description: string
   pageNo: number
+  imageBuffer: string
 }
 
 interface Message {
@@ -69,33 +74,39 @@ export default function ChatApp() {
 
       const data = await response.json();
 
-      const enrichedResults = data.map((item: any) => {
-        const match = item.answer.match(/page(?:\s+no\.?|:)?\s*(\d+)/i);
-        let pageNo = match ? parseInt(match[1]) : null;
+      // const enrichedResults = data.map((item: any) => {
+      //   const match = item.answer.match(/page(?:\s+no\.?|:)?\s*(\d+)/i);
+      //   let pageNo = match ? parseInt(match[1]) : null;
 
-        if (pageNo === 1) {
-          pageNo = 2;
-        }
+      //   if (pageNo === 1) {
+      //     pageNo = 2;
+      //   }
 
+      //   const cleanedFileName = item.filename
+      //     .replace(/\.pdf$/i, '')
+      //     .replace(/^\d+_/, '');
+      //   return {
+      //     fileName: item.filename,
+      //     cleandedFileName: cleanedFileName,
+      //     title: cleanedFileName,
+      //     pageNo: pageNo,
+      //     description: item.answer,
+      //   };
+      // });
+      const enrichedResults = data?.results?.map((item: any) => {
         const cleanedFileName = item.filename
-          .replace(/\.pdf$/i, '')        
+          .replace(/\.pdf$/i, '')
           .replace(/^\d+_/, '');
         return {
           fileName: item.filename,
           cleandedFileName: cleanedFileName,
           title: cleanedFileName,
-          pageNo: pageNo,
+          pageNo: item.pageNo,
           description: item.answer,
+          imageBuffer: item.image_base64,
         };
       });
 
-
-
-
-      // const pdf2PicImage = (EnrichedResults) => {
-      //   console.log(EnrichedResults)
-      // }
-      console.log(enrichedResults)
 
       const resultsMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -112,7 +123,6 @@ export default function ChatApp() {
       setIsLoading(false);
     }
   };
-
 
   const handlePromptSelect = (prompt: string) => {
     setInput(prompt)

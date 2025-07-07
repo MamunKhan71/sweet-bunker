@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Sparkles, FileText, Search, Brain, BookOpen, TrendingUp, Zap, Target, Home, Lightbulb } from "lucide-react"
+import { Home, Lightbulb } from "lucide-react"
+import { useState } from "react"
 
 interface WelcomeScreenProps {
     onPromptSelect: (prompt: string) => void

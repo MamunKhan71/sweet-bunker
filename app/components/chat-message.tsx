@@ -1,8 +1,9 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { FileText, User, Bot, ExternalLink, Clock, BookOpen } from 'lucide-react'
+import { FileText, User, Bot, ExternalLink, Clock, BookOpen } from "lucide-react"
 import ImageFromBase64 from "./imageBase64"
+import { useState, useEffect } from "react"
 
 interface PDFResult {
     fileName: string
@@ -26,15 +27,46 @@ interface ChatMessageProps {
     onPDFClick: (pdf: PDFResult) => void
 }
 
+// Typewriter effect hook
+function useTypewriter(text: string, speed = 30) {
+    const [displayText, setDisplayText] = useState("")
+    const [isComplete, setIsComplete] = useState(false)
+
+    useEffect(() => {
+        if (!text) return
+
+        setDisplayText("")
+        setIsComplete(false)
+        let i = 0
+
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                setDisplayText(text.slice(0, i + 1))
+                i++
+            } else {
+                setIsComplete(true)
+                clearInterval(timer)
+            }
+        }, speed)
+
+        return () => clearInterval(timer)
+    }, [text, speed])
+
+    return { displayText, isComplete }
+}
+
 export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
+    const { displayText: typedContent, isComplete } = useTypewriter(message.type === "results" ? message.content : "", 20)
+
     const formatTime = (date: Date) => {
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     }
+
     console.log(message)
 
     if (message.type === "user") {
         return (
-            <div className="flex justify-end group mb-4">
+            <div className="flex justify-end group mb-6">
                 <div className="max-w-2xl">
                     <div className="flex items-start gap-3">
                         <div className="flex-1">
@@ -61,34 +93,35 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
     }
 
     return (
-        <div className="flex justify-start group mb-4">
+        <div className="flex justify-start group mb-6">
             <div className="max-w-4xl w-full">
                 <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center flex-shrink-0 shadow-sm">
                         <Bot className="w-4 h-4 text-gray-600" />
                     </div>
-                    <div className="flex-1">
-                        <Card className="bg-white border border-gray-200 p-4 rounded-2xl rounded-bl-md shadow-md hover:shadow-lg transition-all duration-200">
-                            <div className="flex items-center gap-2 mb-3">
+                    <div className="flex-1 space-y-4">
+                        {/* Main response text with typewriter effect */}
+                        <div className="bg-white border border-gray-200 p-4 rounded-2xl rounded-bl-md shadow-md">
+                            <div className="flex items-center gap-2 mb-2">
                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                <p className="text-sm font-medium text-gray-700">{message.content}</p>
+                                <p className="text-sm font-medium text-gray-700">
+                                    {typedContent}
+                                    {!isComplete && <span className="animate-pulse">|</span>}
+                                </p>
                             </div>
+                        </div>
 
-                            {message.results && message.results.length > 0 && (
-                                <div className="space-y-2">
-                                    {message.results.map((pdf, index) => (
+                        {/* Results section - only show after typing is complete */}
+                        {isComplete && message.results && message.results.length > 0 && (
+                            <div className="space-y-4">
+                                {message.results.map((pdf, index) => (
+                                    <div key={index} className="space-y-3">
+                                        {/* Text information */}
                                         <div
-                                            key={index}
-                                            className="p-3 border border-gray-100 hover:border-[#dac0ac] transition-all duration-300 cursor-pointer group/card hover:shadow-md rounded-xl bg-gray-50/50 hover:bg-white"
+                                            className="p-4 transition-all duration-300 cursor-pointer group/card hover:shadow-md rounded-xl border border-gray-100 hover:border-[#dac0ac] bg-gray-50/50 hover:bg-white"
                                             onClick={() => onPDFClick(pdf)}
                                         >
                                             <div className="flex items-start gap-3">
-                                                <div className="h-fit w-44 object-cover border rounded-lg overflow-hidden shadow-sm">
-                                                    <ImageFromBase64 base64String={pdf.imageBuffer} />
-                                                </div>
-                                                {/* <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#dac0ac]/10 to-[#c4a688]/10 flex items-center justify-center flex-shrink-0 group-hover/card:from-[#dac0ac]/20 group-hover/card:to-[#c4a688]/20 transition-all duration-300">
-                                                    <FileText className="w-4 h-4 text-[#dac0ac]" />
-                                                </div> */}
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-start justify-between gap-2">
                                                         <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/card:text-[#dac0ac] transition-colors line-clamp-1">
@@ -97,32 +130,37 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                                         <ExternalLink className="w-4 h-4 text-gray-400 group-hover/card:text-[#dac0ac] transition-colors flex-shrink-0" />
                                                     </div>
                                                     <p className="text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">{pdf.description}</p>
-
                                                     <div className="flex items-center gap-4 mt-2">
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500">
-
                                                             <FileText className="w-4 h-4 text-[#c4a688] rounded-full" />
                                                             <span className="font-medium truncate max-w-24">{pdf.fileName}</span>
                                                         </div>
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                                             <BookOpen className="w-4 h-4 text-[#c4a688] rounded-full" />
-                                                            {
-                                                                pdf.pageNo ? (
-                                                                    <span>페이지 {pdf.pageNo}</span>
-                                                                ) : (
-                                                                    <span>페이지 번호가 명확하지 않아 유사한 결과를 표시합니다.</span>
-                                                                )
-                                                            }
+                                                            {pdf.pageNo ? (
+                                                                <span>페이지 {pdf.pageNo}</span>
+                                                            ) : (
+                                                                <span>페이지 번호가 명확하지 않아 유사한 결과를 표시합니다.</span>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
-                            )}
-                        </Card>
-                        <div className="flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+
+                                        {/* Image that pops out - ChatGPT style */}
+                                        <div className="flex justify-start">
+                                            <div className="w-96 h-fit object-contain border rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-white">
+                                                <ImageFromBase64 base64String={pdf.imageBuffer} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Timestamp */}
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             <Clock className="w-3 h-3 text-gray-400" />
                             <span className="text-xs text-gray-500">{formatTime(message.timestamp)}</span>
                         </div>

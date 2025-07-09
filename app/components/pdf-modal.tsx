@@ -53,7 +53,7 @@ export default function PDFModal({ pdf, onClose }: PDFModalProps) {
                         >
                             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                         </Button>
-                        <Button
+                        {/* <Button
                             variant="outline"
                             size="sm"
                             onClick={handleDownload}
@@ -61,7 +61,7 @@ export default function PDFModal({ pdf, onClose }: PDFModalProps) {
                         >
                             <Download className="w-4 h-4 mr-2" />
                             Download
-                        </Button>
+                        </Button> */}
                         <Button
                             variant="outline"
                             size="sm"

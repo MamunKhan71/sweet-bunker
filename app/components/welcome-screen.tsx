@@ -44,17 +44,17 @@ export default function WelcomeScreen({ onPromptSelect }: WelcomeScreenProps) {
             {/* Prompt Categories */}
             <div className="space-y-8">
                 <div className="text-center animate-in slide-in-from-bottom-4 duration-500 delay-400">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-3">이 프롬프트로 시작해보세요</h2>
-                    <p className="text-gray-600">검색을 시작하려면 아무 프롬프트나 클릭하세요</p>
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">이 프롬프트로 시작해보세요</h2>
+                    <p className="text-gray-600 dark:text-gray-300">검색을 시작하려면 아무 프롬프트나 클릭하세요</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-in slide-in-from-bottom-4 duration-500 delay-500">
                     {premadePrompts.map((category, categoryIndex) => (
                         <Card
                             key={categoryIndex}
-                            className={`p-8 border-2 transition-all duration-300 hover:shadow-xl ${hoveredCard === categoryIndex
+                            className={`dark:bg-primary p-8 border-2  transition-all duration-300 hover:shadow-xl ${hoveredCard === categoryIndex
                                 ? "border-[#dac0ac]/50 shadow-lg scale-[1.02]"
-                                : "border-gray-100 hover:border-[#dac0ac]/30"
+                                : "border-gray-100 dark:border-[#dac0ac]/30 hover:border-[#dac0ac]/30"
                                 }`}
                             onMouseEnter={() => setHoveredCard(categoryIndex)}
                             onMouseLeave={() => setHoveredCard(null)}
@@ -66,8 +66,8 @@ export default function WelcomeScreen({ onPromptSelect }: WelcomeScreenProps) {
                                     <category.icon className="w-7 h-7 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900">{category.category}</h3>
-                                    <p className="text-gray-600 text-sm">Explore {category.category.toLowerCase()}</p>
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{category.category}</h3>
+                                    <p className="text-gray-600 dark:text-gray-300 text-sm">Explore {category.category.toLowerCase()}</p>
                                 </div>
                             </div>
 

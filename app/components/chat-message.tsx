@@ -69,20 +69,24 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                 <div className="max-w-2xl">
                     <div className="flex items-start gap-3">
                         <div className="flex-1">
-                            <Card className="bg-gray-50 text-black p-4 rounded-2xl rounded-br-md shadow-md hover:shadow-lg transition-all duration-200">
+                            <Card className="bg-gray-100 dark:bg-primary text-black dark:text-white p-4 rounded-2xl rounded-br-md shadow-md hover:shadow-lg transition-all duration-200">
                                 <p className="text-sm leading-relaxed">{message.content}</p>
                                 {message.searchQuantity && (
-                                    <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-700">
-                                        <span className="text-xs opacity-70">Requesting {message.searchQuantity} results</span>
+                                    <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-300 dark:border-white/30">
+                                        <span className="text-xs opacity-70 dark:opacity-80">
+                                            Requesting {message.searchQuantity} results
+                                        </span>
                                     </div>
                                 )}
                             </Card>
                             <div className="flex items-center justify-end gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Clock className="w-3 h-3 text-gray-400" />
-                                <span className="text-xs text-gray-500">{formatTime(message.timestamp)}</span>
+                                <Clock className="w-3 h-3 text-gray-400 dark:text-white/70" />
+                                <span className="text-xs text-gray-500 dark:text-white/70">
+                                    {formatTime(message.timestamp)}
+                                </span>
                             </div>
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#dac0ac] to-[#c4a688] flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#dac0ac] to-[#c4a688] dark:from-primary dark:to-primary/90 flex items-center justify-center flex-shrink-0 shadow-sm">
                             <User className="w-4 h-4 text-white" />
                         </div>
                     </div>
@@ -91,19 +95,20 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
         )
     }
 
+
     return (
         <div className="flex justify-start group mb-6">
             <div className="max-w-4xl w-full">
                 <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <Bot className="w-4 h-4 text-gray-600" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-primary dark:to-primary/80 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <Bot className="w-4 h-4 text-gray-600 dark:text-white" />
                     </div>
                     <div className="flex-1 space-y-4">
                         {/* Main response text with typewriter effect */}
-                        <div className="bg-white border border-gray-200 p-4 rounded-2xl rounded-bl-md shadow-md">
+                        <div className="bg-white dark:bg-primary border border-gray-200 dark:border-white/20 p-4 rounded-2xl rounded-bl-md shadow-md">
                             <div className="flex items-center gap-2 mb-2">
                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                <p className="text-sm font-medium text-gray-700">
+                                <p className="text-sm font-medium text-gray-700 dark:text-white">
                                     {typedContent}
                                     {!isComplete && <span className="animate-pulse">|</span>}
                                 </p>
@@ -117,24 +122,26 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                     <div key={index} className="space-y-3">
                                         {/* Text information */}
                                         <div
-                                            className="p-4 transition-all duration-300 cursor-pointer group/card hover:shadow-md rounded-xl border border-gray-100 hover:border-[#dac0ac] bg-gray-50/50 hover:bg-white"
+                                            className="p-4 transition-all duration-300 cursor-pointer group/card hover:shadow-md rounded-xl border border-gray-100 dark:border-white/10 hover:border-[#dac0ac] bg-gray-50/50 dark:bg-primary/30 hover:bg-white dark:hover:bg-primary/50"
                                             onClick={() => onPDFClick(pdf)}
                                         >
                                             <div className="flex items-start gap-3">
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-start justify-between gap-2">
-                                                        <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/card:text-[#dac0ac] transition-colors line-clamp-1">
+                                                        <h4 className="font-semibold text-gray-900 dark:text-white text-sm leading-tight group-hover/card:text-[#dac0ac] transition-colors line-clamp-1">
                                                             {pdf.title}
                                                         </h4>
-                                                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover/card:text-[#dac0ac] transition-colors flex-shrink-0" />
+                                                        <ExternalLink className="w-4 h-4 text-gray-400 dark:text-white group-hover/card:text-[#dac0ac] transition-colors flex-shrink-0" />
                                                     </div>
-                                                    <p className="text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">{pdf.description}</p>
+                                                    <p className="text-xs text-gray-600 dark:text-white/80 mt-1 line-clamp-2 leading-relaxed">
+                                                        {pdf.description}
+                                                    </p>
                                                     <div className="flex items-center gap-4 mt-2">
-                                                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                                                        <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-white/70">
                                                             <FileText className="w-4 h-4 text-[#c4a688] rounded-full" />
                                                             <span className="font-medium truncate max-w-24">{pdf.fileName}</span>
                                                         </div>
-                                                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                                                        <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-white/70">
                                                             <BookOpen className="w-4 h-4 text-[#c4a688] rounded-full" />
                                                             {pdf.pageNo ? (
                                                                 <span>페이지 {pdf.pageNo}</span>
@@ -149,7 +156,7 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
 
                                         {/* Image that pops out - ChatGPT style */}
                                         <div className="flex justify-start">
-                                            <div className="w-96 h-fit object-contain border rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-white">
+                                            <div className="w-96 h-fit object-contain border dark:border-white/10 rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-white dark:bg-primary/40">
                                                 <ImageFromBase64 base64String={pdf.imageBuffer} />
                                             </div>
                                         </div>
@@ -160,12 +167,15 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
 
                         {/* Timestamp */}
                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Clock className="w-3 h-3 text-gray-400" />
-                            <span className="text-xs text-gray-500">{formatTime(message.timestamp)}</span>
+                            <Clock className="w-3 h-3 text-gray-400 dark:text-white/60" />
+                            <span className="text-xs text-gray-500 dark:text-white/60">
+                                {formatTime(message.timestamp)}
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     )
+
 }

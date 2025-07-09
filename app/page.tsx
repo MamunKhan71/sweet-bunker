@@ -10,6 +10,7 @@ import ChatMessage from "./components/chat-message"
 import LoadingSkeleton from "./components/loading-skeleton"
 import PDFModal from "./components/pdf-modal"
 import WelcomeScreen from "./components/welcome-screen"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 interface EnrichedResult {
   fileName: string;
@@ -143,9 +144,9 @@ export default function ChatApp() {
     <>
       {/* <AppSidebar /> */}
       <SidebarInset>
-        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-white flex flex-col">
+        <div className="min-h-screen flex flex-col text-gray-900 dark:text-white bg-gradient-to-br from-white via-gray-50/30 to-white dark:from-primary/90 dark:via-primary/80 dark:to-primary">
           {/* Header */}
-          <header className="border-b border-gray-100 bg-white/80 backdrop-blur-xl sticky top-0 z-10">
+          <header className="border-b border-gray-100 dark:border-primary/10 bg-white/80 dark:bg-primary/80 backdrop-blur-xl sticky top-0 z-10">
             <div className="px-6 py-4">
               <div className="flex items-center gap-4">
                 {/* <SidebarTrigger className="text-gray-600 hover:text-black transition-colors" /> */}
@@ -153,12 +154,13 @@ export default function ChatApp() {
                   <div className="w-8 h-8 flex items-center justify-center">
                     <img src="/sweet-banker.png" alt="sweet-banker" />
                   </div>
-                  <div className="flex justify-between w-full items-center">
+                  <div className="flex justify-between gap-12 w-full items-center">
                     <div className="w-full">
-                      <h1 className="text-xl font-bold text-gray-900">SWEET BUNKER DESIGN Co.,Ltd</h1>
-                      <p className="text-xs text-gray-500">AI 기반 문서 탐색                      </p>
+                      <h1 className="text-xl font-bold text-gray-900 dark:text-white">SWEET BUNKER DESIGN Co.,Ltd</h1>
+                      <p className="text-xs text-gray-500 dark:text-white">AI 기반 문서 탐색                      </p>
                     </div>
-                    <div className="text-sm text-gray-400 flex gap-2 items-center w-96 ">
+                    <ThemeToggle />
+                    <div className="text-sm text-gray-400 dark:text-white flex gap-2 items-center w-96 ">
                       <Copyright className="w-4 h-4" />
                       <span className="font-medium text-right">모든 권리 보유 |<span><a target="_blank" href="https://acotegroup.com/"> Acote Group LTD</a></span></span>
                     </div>
@@ -187,7 +189,7 @@ export default function ChatApp() {
           </div>
 
           {/* Enhanced Input Form - Fixed at bottom */}
-          <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100">
+          <div className="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-primary backdrop-blur-xl border-t border-gray-100 dark:border-primary/10">
             <div className="md:max-w-5xl mx-auto p-6">
               <div>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -209,7 +211,7 @@ export default function ChatApp() {
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handleKeyDown}
                       placeholder="문서에 대해 궁금한 걸 물어보세요…(엔터를 눌러 전송, Shift+Enter는 줄바꿈)"
-                      className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
+                      className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 dark:bg-primary/80 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
                       disabled={isLoading}
                     />
 
@@ -243,7 +245,7 @@ export default function ChatApp() {
 
                   {/* Status indicator */}
                   {isLoading && (
-                    <div className="flex items-center gap-2 text-sm text-gray-500 animate-pulse">
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white animate-pulse">
                       <div className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"></div>
                       <div
                         className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"

@@ -35,8 +35,8 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, toggleLanguag
                 />
                 {/* Labels */}
                 <div className="flex gap-5 w-full justify-between p-3.5 text-xs font-medium z-10">
-                    <span className={isEnglish ? "text-orange-500 dark:text-white font-bold" : "text-gray-400"}>EN</span>
-                    <span className={!isEnglish ? "text-orange-500 dark:text-white font-bold" : "text-gray-400"}>KO</span>
+                    <span className={isEnglish ? "text-primary dark:text-white font-bold" : "text-gray-400"}>EN</span>
+                    <span className={!isEnglish ? "text-primary dark:text-white font-bold" : "text-gray-400"}>KO</span>
                 </div>
             </Button>
         </div>

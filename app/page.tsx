@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { SidebarInset } from "@/components/ui/sidebar"
 import { Textarea } from "@/components/ui/textarea"
-import { Copyright, Send } from "lucide-react"
+import { Copyright, RotateCw, Send } from "lucide-react"
 import type React from "react"
 import { useEffect, useState } from "react"
 import ChatMessage from "./components/chat-message"
@@ -57,7 +57,7 @@ const translations = {
 
 export default function ChatApp() {
   const [language, setLanguage] = useState<"en" | "ko">("en")
-
+  const [isSubmited, setIsSubmitted] = useState(false)
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language")
     if (savedLanguage === "en" || savedLanguage === "ko") {
@@ -95,6 +95,7 @@ export default function ChatApp() {
     setMessages((prev) => [...prev, userMessage])
     setInput("")
     setIsLoading(true)
+    setIsSubmitted(true)
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/search`, {
@@ -150,6 +151,10 @@ export default function ChatApp() {
     }
   }
 
+  const handleRefresh = () => {
+    window.location.reload()
+  }
+
   return (
     <>
       <SidebarInset>
@@ -163,7 +168,7 @@ export default function ChatApp() {
                     <img src="/sweet-banker.png" alt="sweet-banker" />
                   </div>
                   <div className="flex justify-between gap-6 w-full items-center">
-                    <Link href={'/'}  className="w-full">
+                    <Link href={'/'} className="w-full">
                       <div className="w-full">
                         <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t.title}</h1>
                         <p className="text-xs text-gray-500 dark:text-white">{t.subtitle}</p>
@@ -231,11 +236,23 @@ export default function ChatApp() {
                     />
 
                     {/* Quantity Selector */}
+                    <div className="absolute right-[70px] top-4 flex items-center gap-3">
+                      {
+                        isSubmited && <Button
+                          onClick={() => handleRefresh()}
+                          type="submit"
+                          className="bg-black hover:bg-gray-800 text-white rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-700 hover:cursor-pointer"
+                        >
+                          <RotateCw className="w-5 h-5" />
+                        </Button>
+                      }
+
+                    </div>
                     <div className="absolute right-4 top-4 flex items-center gap-3">
                       <Button
                         type="submit"
                         disabled={isLoading || !input.trim()}
-                        className="bg-black hover:bg-gray-800 text-white rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-700"
+                        className="bg-black hover:bg-gray-800 text-white rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-700 hover:cursor-pointer"
                       >
                         <Send className="w-5 h-5" />
                       </Button>
@@ -243,7 +260,7 @@ export default function ChatApp() {
                   </div>
 
                   {/* Status indicator */}
-                  {isLoading && (
+                  {/* {isLoading && (
                     <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white animate-pulse">
                       <div className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"></div>
                       <div
@@ -256,7 +273,7 @@ export default function ChatApp() {
                       ></div>
                       <span className="ml-2">{t.searching}</span>
                     </div>
-                  )}
+                  )} */}
                 </form>
               </div>
             </div>

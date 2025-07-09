@@ -61,7 +61,6 @@ export default function ChatMessage({ message, onPDFClick, language }: ChatMessa
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     }
 
-    console.log(message)
 
     if (message.type === "user") {
         return (

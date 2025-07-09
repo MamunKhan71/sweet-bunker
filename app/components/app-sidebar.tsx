@@ -13,7 +13,7 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar";
-import { Copyright, HelpCircle, History, Plus, Search, Settings } from "lucide-react";
+import { HelpCircle, History, Plus, Search, Settings } from "lucide-react";
 import { useState } from "react";
 
 const recentSearches = [

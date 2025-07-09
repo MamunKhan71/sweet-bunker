@@ -1,6 +1,8 @@
 "use client"
 
+import { LanguageToggle } from "@/components/language-toggle"
 import { BorderBeam } from "@/components/magicui/border-beam"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { SidebarInset } from "@/components/ui/sidebar"
 import { Textarea } from "@/components/ui/textarea"
@@ -11,22 +13,8 @@ import ChatMessage from "./components/chat-message"
 import LoadingSkeleton from "./components/loading-skeleton"
 import PDFModal from "./components/pdf-modal"
 import WelcomeScreen from "./components/welcome-screen"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LanguageToggle } from "@/components/language-toggle"
+import RefreshButtons from "./components/refresh-buttons"
 
-interface EnrichedResult {
-  fileName: string
-  pageNo: number | null
-}
-
-const options = {
-  density: 100,
-  saveFilename: "untitled",
-  savePath: "./images",
-  format: "png",
-  width: 600,
-  height: 600,
-}
 
 interface PDFResult {
   fileName: string
@@ -45,7 +33,6 @@ interface Message {
   timestamp: Date
 }
 
-// Translation object
 const translations = {
   en: {
     title: "SWEET BUNKER DESIGN Co.,Ltd",
@@ -88,7 +75,6 @@ export default function ChatApp() {
 
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
-  const [searchQuantity, setSearchQuantity] = useState(5)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedPDF, setSelectedPDF] = useState<PDFResult | null>(null)
 
@@ -175,13 +161,15 @@ export default function ChatApp() {
                   <div className="w-8 h-8 flex items-center justify-center">
                     <img src="/sweet-banker.png" alt="sweet-banker" />
                   </div>
-                  <div className="flex justify-between gap-12 w-full items-center">
+                  <div className="flex justify-between gap-6 w-full items-center">
                     <div className="w-full">
                       <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t.title}</h1>
                       <p className="text-xs text-gray-500 dark:text-white">{t.subtitle}</p>
                     </div>
-                    <LanguageToggle language={language} toggleLanguage={toggleLanguage} />
-                    <ThemeToggle />
+                    <div className="flex gap-4 items-center bg-gray-50 dark:bg-primary/90 border border-gray-100 dark:border-gray-700 rounded-full p-1">
+                      <LanguageToggle language={language} toggleLanguage={toggleLanguage} />
+                      <ThemeToggle />
+                    </div>
                     <div className="text-sm text-gray-400 dark:text-white flex gap-2 items-center w-96">
                       <Copyright className="w-4 h-4" />
                       <span className="font-medium text-right">
@@ -211,7 +199,7 @@ export default function ChatApp() {
               )}
             </div>
           </div>
-
+          
           {/* Enhanced Input Form - Fixed at bottom */}
           <div className="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-primary backdrop-blur-xl border-t border-gray-100 dark:border-primary/10">
             <div className="md:max-w-5xl mx-auto p-6">

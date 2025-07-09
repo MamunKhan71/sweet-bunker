@@ -235,7 +235,7 @@ export default function ChatApp() {
                         className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 dark:bg-primary/80 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
                         disabled={isLoading}
                       />
-                      
+
                     </div>
                     <div className="block md:hidden">
                       <Textarea
@@ -267,34 +267,32 @@ export default function ChatApp() {
                         disabled={isLoading || !input.trim()}
                         className="bg-black hover:bg-gray-800 text-white rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-700 hover:cursor-pointer"
                       >
-                        <Send className="w-5 h-5" />
+                        {isLoading ? (
+                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white animate-pulse">
+                            <div className="w-1 h-1 bg-[#dac0ac] rounded-full animate-bounce"></div>
+                            <div
+                              className="w-1 h-1 bg-[#dac0ac] rounded-full animate-bounce"
+                              style={{ animationDelay: "0.1s" }}
+                            ></div>
+                            <div
+                              className="w-1 h-1 bg-[#dac0ac] rounded-full animate-bounce"
+                              style={{ animationDelay: "0.2s" }}
+                            ></div>
+                          </div>
+                        ) :
+                          <Send className="w-5 h-5" />
+                        }
                       </Button>
                     </div>
                   </div>
-
-                  {/* Status indicator */}
-                  {isLoading && (
-                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white animate-pulse">
-                      <div className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"></div>
-                      <div
-                        className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
-                      <span className="ml-2">{t.searching}</span>
-                    </div>
-                  )}
                 </form>
               </div>
             </div>
           </div>
-          
+
           {/* PDF Modal */}
           {selectedPDF && <PDFModal pdf={selectedPDF} onClose={() => setSelectedPDF(null)} />}
-            
+
         </div>
       </SidebarInset>
     </>

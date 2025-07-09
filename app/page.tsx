@@ -48,7 +48,6 @@ export default function ChatApp() {
   const [searchQuantity, setSearchQuantity] = useState(5)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedPDF, setSelectedPDF] = useState<PDFResult | null>(null)
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -156,9 +155,11 @@ export default function ChatApp() {
                   </div>
                   <div className="flex justify-between gap-12 w-full items-center">
                     <div className="w-full">
+                      {/* <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('title')}</h1> */}
                       <h1 className="text-xl font-bold text-gray-900 dark:text-white">SWEET BUNKER DESIGN Co.,Ltd</h1>
                       <p className="text-xs text-gray-500 dark:text-white">AI 기반 문서 탐색                      </p>
                     </div>
+                    {/* <LanguageToggle /> */}
                     <ThemeToggle />
                     <div className="text-sm text-gray-400 dark:text-white flex gap-2 items-center w-96 ">
                       <Copyright className="w-4 h-4" />

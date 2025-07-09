@@ -12,13 +12,13 @@ interface WelcomeScreenProps {
 const premadePrompts = [
     {
         category: "인테리어 디자인 스케치 유형",
-        icon: Home, 
+        icon: Home,
         color: "from-pink-500 to-red-500",
         prompts: [
-            "서버룸 저장소가 포함된 복도 도면",
-            "복도 및 팬트리 맞춤 가구 도면",
-            "빌트인 스토리지가 포함된 현대 복도 도면",
-            "팬트리와 서버룸이 포함된 복도 평면도",
+            "서버룸 저장소가 포함된 도면",
+            "팬트리 맞춤 가구 도면",
+            "소회의실이 있는 도면",
+            "대표실이 포함된 복도 평면도",
         ],
     },
     {
@@ -27,9 +27,9 @@ const premadePrompts = [
         color: "from-yellow-500 to-orange-500",
         prompts: [
             "팬트리 수납이 포함된 소형 복도 도면",
-            "서버룸과 가구가 포함된 복도 평면도",
+            "회의실 2개가 있는 평면도",
             "수납이 포함된 간단한 복도 도면",
-            "팬트리와 수납 아이디어가 포함된 복도 도면",
+            "카페테리아가 있는 도면",
         ],
     }
 ];
@@ -37,7 +37,6 @@ const premadePrompts = [
 
 export default function WelcomeScreen({ onPromptSelect }: WelcomeScreenProps) {
     const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-
     return (
         <div className="py-12 animate-in fade-in-50 duration-700">
             {/* Hero Section */}

@@ -19,7 +19,6 @@ interface PDFModalProps {
 export default function PDFModal({ pdf, onClose }: PDFModalProps) {
     const [isLoading, setIsLoading] = useState(true)
     const [isFullscreen, setIsFullscreen] = useState(false)
-
     const pdfUrl = `/pdfs/${pdf.fileName}#page=${pdf.pageNo}`
 
     return (

@@ -30,7 +30,6 @@ interface ChatMessageProps {
 function useTypewriter(text: string, speed = 30) {
     const [displayText, setDisplayText] = useState("")
     const [isComplete, setIsComplete] = useState(false)
-
     useEffect(() => {
         if (!text) return
 

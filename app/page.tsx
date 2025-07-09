@@ -92,7 +92,7 @@ export default function ChatApp() {
   const [isLoading, setIsLoading] = useState(false)
   const [selectedPDF, setSelectedPDF] = useState<PDFResult | null>(null)
 
-  const t = translations[language] // Select translations based on language
+  const t = translations[language]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -198,7 +198,7 @@ export default function ChatApp() {
           <div className="flex-1 px-6 pb-40 overflow-y-auto">
             <div className="md:max-w-5xl mx-auto">
               {messages.length === 0 ? (
-                <WelcomeScreen onPromptSelect={handlePromptSelect} />
+                <WelcomeScreen onPromptSelect={handlePromptSelect} language={language} />
               ) : (
                 <div className="py-8 space-y-8">
                   {messages.map((message) => (

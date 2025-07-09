@@ -14,6 +14,7 @@ import LoadingSkeleton from "./components/loading-skeleton"
 import PDFModal from "./components/pdf-modal"
 import WelcomeScreen from "./components/welcome-screen"
 import RefreshButtons from "./components/refresh-buttons"
+import Link from "next/link"
 
 
 interface PDFResult {
@@ -162,10 +163,12 @@ export default function ChatApp() {
                     <img src="/sweet-banker.png" alt="sweet-banker" />
                   </div>
                   <div className="flex justify-between gap-6 w-full items-center">
-                    <div className="w-full">
-                      <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t.title}</h1>
-                      <p className="text-xs text-gray-500 dark:text-white">{t.subtitle}</p>
-                    </div>
+                    <Link href={'/'}  className="w-full">
+                      <div className="w-full">
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t.title}</h1>
+                        <p className="text-xs text-gray-500 dark:text-white">{t.subtitle}</p>
+                      </div>
+                    </Link>
                     <div className="flex gap-4 items-center bg-gray-50 dark:bg-primary/90 border border-gray-100 dark:border-gray-700 rounded-full p-1">
                       <LanguageToggle language={language} toggleLanguage={toggleLanguage} />
                       <ThemeToggle />
@@ -199,7 +202,7 @@ export default function ChatApp() {
               )}
             </div>
           </div>
-          
+
           {/* Enhanced Input Form - Fixed at bottom */}
           <div className="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-primary backdrop-blur-xl border-t border-gray-100 dark:border-primary/10">
             <div className="md:max-w-5xl mx-auto p-6">

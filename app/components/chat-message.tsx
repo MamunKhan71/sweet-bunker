@@ -97,7 +97,7 @@ export default function ChatMessage({ message, onPDFClick, language }: ChatMessa
 
     return (
         <div className="flex justify-start group mb-6">
-            <div className="max-w-4xl w-full">
+            <div className="md:max-w-4xl w-full">
                 <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-primary dark:to-primary/80 flex items-center justify-center flex-shrink-0 shadow-sm">
                         <Bot className="w-4 h-4 text-gray-600 dark:text-white" />
@@ -132,25 +132,6 @@ export default function ChatMessage({ message, onPDFClick, language }: ChatMessa
                                                         </h4>
                                                         <ExternalLink className="w-4 h-4 text-gray-400 dark:text-white group-hover/card:text-[#dac0ac] transition-colors flex-shrink-0" />
                                                     </div>
-                                                    {/* <p className="text-xs text-gray-600 dark:text-white/80 mt-1 line-clamp-2 leading-relaxed">
-                                                        {pdf.title ? (
-                                                            <>
-                                                                The title <strong>{pdf.title}</strong>{" "}
-                                                                {pdf.fileName ? (
-                                                                    <>
-                                                                        is referenced in <em>{pdf.fileName}</em>
-                                                                        {pdf.pageNo ? <> on page {pdf.pageNo}</> : null}.
-                                                                    </>
-                                                                ) : pdf.pageNo ? (
-                                                                    <>is mentioned on page {pdf.pageNo}.</>
-                                                                ) : (
-                                                                    <>is mentioned in the document.</>
-                                                                )}
-                                                            </>
-                                                        ) : (
-                                                            "Reference details are unavailable."
-                                                        )}
-                                                    </p> */}
                                                     <div className="flex items-center gap-4 mt-2">
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-white/70">
                                                             <FileText className="w-4 h-4 text-[#c4a688] rounded-full" />
@@ -171,7 +152,7 @@ export default function ChatMessage({ message, onPDFClick, language }: ChatMessa
 
                                         {/* Image that pops out - ChatGPT style */}
                                         <div className="flex justify-start">
-                                            <div className="w-96 h-fit object-contain border dark:border-white/10 rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-white dark:bg-primary/40">
+                                            <div className="w-full md:w-96 h-fit object-contain border dark:border-white/10 rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-white dark:bg-primary/40">
                                                 <ImageFromBase64 base64String={pdf.imageBuffer} />
                                             </div>
                                         </div>

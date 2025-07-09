@@ -170,15 +170,15 @@ export default function ChatApp() {
                   <div className="flex justify-between gap-6 w-full items-center">
                     <Link href={'/'} className="w-full">
                       <div className="w-full">
-                        <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t.title}</h1>
-                        <p className="text-xs text-gray-500 dark:text-white">{t.subtitle}</p>
+                        <h1 className="text-xs md:text-xl font-bold text-gray-900 dark:text-white">{t.title}</h1>
+                        <p className="text-xs text-gray-500 dark:text-white hidden md:block">{t.subtitle}</p>
                       </div>
                     </Link>
-                    <div className="flex gap-4 items-center bg-gray-50 dark:bg-primary/90 border border-gray-100 dark:border-gray-700 rounded-full p-1">
+                    <div className="flex gap-2 md:gap-4 items-center bg-gray-50 dark:bg-primary/90 border border-gray-100 dark:border-gray-700 rounded-full p-1">
                       <LanguageToggle language={language} toggleLanguage={toggleLanguage} />
                       <ThemeToggle />
                     </div>
-                    <div className="text-sm text-gray-400 dark:text-white flex gap-2 items-center w-96">
+                    <div className="text-sm text-gray-400 dark:text-white  gap-2 items-center w-96 hidden md:flex">
                       <Copyright className="w-4 h-4" />
                       <span className="font-medium text-right">
                         {t.copyright} | <a target="_blank" href="https://acotegroup.com/">{t.acoteLink}</a>
@@ -226,14 +226,27 @@ export default function ChatApp() {
                       borderWidth={2}
                       className="from-transparent via-blue-500 to-transparent"
                     />
-                    <Textarea
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      placeholder={t.placeholder}
-                      className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 dark:bg-primary/80 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
-                      disabled={isLoading}
-                    />
+                    <div className="hidden md:block">
+                      <Textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder={t.placeholder}
+                        className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 dark:bg-primary/80 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-32 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
+                        disabled={isLoading}
+                      />
+                      
+                    </div>
+                    <div className="block md:hidden">
+                      <Textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder={`${t.placeholder.slice(0, 20)}...`}
+                        className="min-h-[80px] max-h-[200px] w-full resize-none border-2 border-gray-200 dark:bg-primary/80 focus:border-black focus:ring-0 rounded-2xl px-6 py-4 pr-16 text-base placeholder:text-gray-400 shadow-lg transition-all duration-200 hover:shadow-xl focus:shadow-xl"
+                        disabled={isLoading}
+                      />
+                    </div>
 
                     {/* Quantity Selector */}
                     <div className="absolute right-[70px] top-4 flex items-center gap-3">
@@ -260,7 +273,7 @@ export default function ChatApp() {
                   </div>
 
                   {/* Status indicator */}
-                  {/* {isLoading && (
+                  {isLoading && (
                     <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white animate-pulse">
                       <div className="w-2 h-2 bg-[#dac0ac] rounded-full animate-bounce"></div>
                       <div
@@ -273,14 +286,15 @@ export default function ChatApp() {
                       ></div>
                       <span className="ml-2">{t.searching}</span>
                     </div>
-                  )} */}
+                  )}
                 </form>
               </div>
             </div>
           </div>
-
+          
           {/* PDF Modal */}
           {selectedPDF && <PDFModal pdf={selectedPDF} onClose={() => setSelectedPDF(null)} />}
+            
         </div>
       </SidebarInset>
     </>

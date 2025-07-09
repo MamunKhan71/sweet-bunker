@@ -92,22 +92,22 @@ export default function WelcomeScreen({ onPromptSelect, language }: WelcomeScree
                         return (
                             <Card
                                 key={categoryIndex}
-                                className={`dark:bg-primary p-8 border-2  transition-all duration-300 hover:shadow-xl ${hoveredCard === categoryIndex
+                                className={`dark:bg-primary p-4 md:p-8 border-2  transition-all duration-300 hover:shadow-xl ${hoveredCard === categoryIndex
                                     ? "border-[#dac0ac]/50 shadow-lg scale-[1.02]"
                                     : "border-gray-100 dark:border-[#dac0ac]/30 hover:border-[#dac0ac]/30"
                                     }`}
                                 onMouseEnter={() => setHoveredCard(categoryIndex)}
                                 onMouseLeave={() => setHoveredCard(null)}
                             >
-                                <div className="flex items-center gap-4 mb-6">
+                                <div className="flex items-center gap-4 md:mb-6">
                                     <div
                                         className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg`}
                                     >
                                          <Icon className="w-7 h-7 text-white" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{category.category}</h3>
-                                        <p className="text-gray-600 dark:text-gray-300 text-sm">Explore {category.category.toLowerCase()}</p>
+                                        <h3 className="text-sm md:text-xl font-bold text-gray-900 dark:text-white">{category.category}</h3>
+                                        <p className="text-gray-600 dark:text-gray-300 text-xs md:text-sm">Explore {category.category.toLowerCase()}</p>
                                     </div>
                                 </div>
 

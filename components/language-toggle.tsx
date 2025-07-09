@@ -12,12 +12,12 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, toggleLanguag
         window.location.reload()
     }
     return (
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 md:gap-4 items-center">
             <Button
                 onClick={() => handleRefresh()}
                 variant="ghost"
                 size="sm"
-                className="relative h-9 w-9 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 inline-flex items-center justify-center hover:cursor-pointer"
+                className="relative h-9 w-9 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200  items-center justify-center hover:cursor-pointer hidden md:inline-flex"
             >
                 <RotateCcw className="w-4 h-4" />
             </Button>

@@ -24,6 +24,7 @@ interface Message {
 
 interface ChatMessageProps {
     message: Message
+    language: string
     onPDFClick: (pdf: PDFResult) => void
 }
 
@@ -53,7 +54,7 @@ function useTypewriter(text: string, speed = 30) {
     return { displayText, isComplete }
 }
 
-export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
+export default function ChatMessage({ message, onPDFClick, language }: ChatMessageProps) {
     const { displayText: typedContent, isComplete } = useTypewriter(message.type === "results" ? message.content : "", 20)
 
     const formatTime = (date: Date) => {

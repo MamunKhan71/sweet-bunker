@@ -133,9 +133,25 @@ export default function ChatMessage({ message, onPDFClick }: ChatMessageProps) {
                                                         </h4>
                                                         <ExternalLink className="w-4 h-4 text-gray-400 dark:text-white group-hover/card:text-[#dac0ac] transition-colors flex-shrink-0" />
                                                     </div>
-                                                    <p className="text-xs text-gray-600 dark:text-white/80 mt-1 line-clamp-2 leading-relaxed">
-                                                        {pdf.description}
-                                                    </p>
+                                                    {/* <p className="text-xs text-gray-600 dark:text-white/80 mt-1 line-clamp-2 leading-relaxed">
+                                                        {pdf.title ? (
+                                                            <>
+                                                                The title <strong>{pdf.title}</strong>{" "}
+                                                                {pdf.fileName ? (
+                                                                    <>
+                                                                        is referenced in <em>{pdf.fileName}</em>
+                                                                        {pdf.pageNo ? <> on page {pdf.pageNo}</> : null}.
+                                                                    </>
+                                                                ) : pdf.pageNo ? (
+                                                                    <>is mentioned on page {pdf.pageNo}.</>
+                                                                ) : (
+                                                                    <>is mentioned in the document.</>
+                                                                )}
+                                                            </>
+                                                        ) : (
+                                                            "Reference details are unavailable."
+                                                        )}
+                                                    </p> */}
                                                     <div className="flex items-center gap-4 mt-2">
                                                         <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-white/70">
                                                             <FileText className="w-4 h-4 text-[#c4a688] rounded-full" />
